@@ -3,7 +3,7 @@ insert into USERS (ID, USERNAME, PASSWORD, STATUS) values (2, 'ocano2@company.xy
 insert into USERS (ID, USERNAME, PASSWORD, STATUS) values (3, 'ocano3@company.xyz', 'pass123', 'INACTIVE');
 
 insert into OPERATIONS(ID, TYPE, COST) values (1, 'ADDITION', 1.25);
-insert into OPERATIONS(ID, TYPE, COST) values (2, 'SUBSTRACTION', 1.25);
+insert into OPERATIONS(ID, TYPE, COST) values (2, 'SUBTRACTION', 1.25);
 insert into OPERATIONS(ID, TYPE, COST) values (3, 'MULTIPLICATION', 1.25);
 insert into OPERATIONS(ID, TYPE, COST) values (4, 'DIVISION', 1.25);
 insert into OPERATIONS(ID, TYPE, COST) values (5, 'SQUARE_ROOT', 1.25);
