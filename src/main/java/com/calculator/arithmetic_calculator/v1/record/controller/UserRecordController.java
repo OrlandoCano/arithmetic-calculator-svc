@@ -2,7 +2,6 @@ package com.calculator.arithmetic_calculator.v1.record.controller;
 
 import static com.calculator.arithmetic_calculator.v1.constants.ArithmeticCalculatorConstants.ARITHMETIC_CALCULATOR_PATH;
 
-import com.calculator.arithmetic_calculator.v1.randomstring.strategy.RandomStringStrategy;
 import com.calculator.arithmetic_calculator.v1.record.model.RecordDto;
 import com.calculator.arithmetic_calculator.v1.record.service.RecordService;
 import java.util.List;
@@ -21,11 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Log
 public class UserRecordController {
   private final RecordService recordService;
-  private final RandomStringStrategy strategy;
 
   @GetMapping("records")
   public ResponseEntity<List<RecordDto>> loadRecords() {
-    log.info(strategy.performOperation(null));
+
     return ResponseEntity.ok(recordService.loadRecords());
   }
 }

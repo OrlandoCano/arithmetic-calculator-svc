@@ -1,13 +1,24 @@
 package com.calculator.arithmetic_calculator.v1.squareroot.strategy;
 
+import static com.calculator.arithmetic_calculator.v1.constants.ArithmeticCalculatorConstants.INSUFFICIENT_CREDITS_ERROR;
 import static com.calculator.arithmetic_calculator.v1.constants.OperationType.SQUARE_ROOT;
 
+import com.calculator.arithmetic_calculator.v1.exception.InsufficientCreditsException;
+import com.calculator.arithmetic_calculator.v1.operation.service.OperationService;
+import com.calculator.arithmetic_calculator.v1.record.model.RecordDto;
+import com.calculator.arithmetic_calculator.v1.record.service.RecordService;
 import com.calculator.arithmetic_calculator.v1.request.BaseOperationRequest;
 import com.calculator.arithmetic_calculator.v1.strategy.OperationStrategy;
+import com.calculator.arithmetic_calculator.v1.user.service.UserService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SquareRootStrategy implements OperationStrategy {
+public class SquareRootStrategy extends OperationStrategy {
+  private SquareRootStrategy(
+      OperationService operationService, RecordService recordService, UserService userService) {
+    super(operationService, recordService, userService);
+  }
+
   @Override
   public boolean isApplicable(BaseOperationRequest request) {
     return SQUARE_ROOT == request.getOperationType();
@@ -15,6 +26,21 @@ public class SquareRootStrategy implements OperationStrategy {
 
   @Override
   public String performOperation(BaseOperationRequest request) {
-    return "" + (Math.sqrt(request.getFirstOperand()));
+
+    double result = Math.sqrt(request.getFirstOperand());
+    RecordDto.Builder newRecord = createRecord(SQUARE_ROOT);
+
+    if (!operationService.sufficientCredits(request)) {
+
+      String errorResponse =
+          String.format(INSUFFICIENT_CREDITS_ERROR, request.getOperationType().name());
+      newRecord.withOperationResponse(errorResponse);
+      throw new InsufficientCreditsException(errorResponse);
+    }
+
+    newRecord.withOperationResponse("Square Root Applied Result=" + result);
+    recordService.saveRecord(newRecord.build());
+
+    return "" + result;
   }
 }

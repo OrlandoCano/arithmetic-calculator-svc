@@ -26,6 +26,6 @@ public class SubtractionController {
       @RequestHeader HttpHeaders httpHeaders, @RequestBody SubtractionRequest request) {
     String result = requestFacade.processRequest(httpHeaders, request);
 
-    return ResponseEntity.ok(result);
+    return ResponseEntity.status(201).body(result);
   }
 }
