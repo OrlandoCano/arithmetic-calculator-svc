@@ -7,4 +7,6 @@ public interface RecordService {
   List<RecordDto> loadRecords();
 
   RecordDto loadLatestUserRecord(String username);
+
+  void saveRecord(RecordDto newRecord);
 }

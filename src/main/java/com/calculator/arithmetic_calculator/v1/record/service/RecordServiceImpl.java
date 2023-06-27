@@ -46,4 +46,17 @@ public class RecordServiceImpl implements RecordService {
         .withCreatedDate(latestRecord.getCreatedDate())
         .build();
   }
+
+  @Override
+  public void saveRecord(RecordDto newRecord) {
+    repository.save(
+        new Record(
+            null,
+            newRecord.getOperationId(),
+            newRecord.getUserId(),
+            newRecord.getAmount(),
+            newRecord.getUserBalance(),
+            newRecord.getOperationResponse(),
+            newRecord.getCreatedDate()));
+  }
 }
