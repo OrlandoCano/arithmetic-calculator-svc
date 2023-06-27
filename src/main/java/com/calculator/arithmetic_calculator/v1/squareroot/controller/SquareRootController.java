@@ -26,6 +26,6 @@ public class SquareRootController {
       @RequestHeader HttpHeaders httpHeaders, @RequestBody SquareRootRequest request) {
     String result = requestFacade.processRequest(httpHeaders, request);
 
-    return ResponseEntity.ok(result);
+    return ResponseEntity.status(201).body(result);
   }
 }
