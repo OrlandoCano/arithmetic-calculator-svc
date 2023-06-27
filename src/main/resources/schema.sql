@@ -28,7 +28,7 @@ create table OPERATIONS(
 create table RECORDS(
     ID int not null AUTO_INCREMENT,
     OPERATION_ID UUID not null,
-    USER_ID int not null,
+    USER_ID VARCHAR(45) NOT NULL,
     AMOUNT float not null,
     USER_BALANCE float not null,
     OPERATION_RESPONSE varchar(150) not null,

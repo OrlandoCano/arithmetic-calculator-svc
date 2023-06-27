@@ -15,7 +15,7 @@ import lombok.extern.jackson.Jacksonized;
 public class RecordDto {
   Long id;
   UUID operationId;
-  Long userId;
+  String userId;
   Double amount;
   Double userBalance;
   String operationResponse;

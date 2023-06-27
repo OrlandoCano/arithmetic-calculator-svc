@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface RecordService {
   List<RecordDto> loadRecords();
+
+  RecordDto loadLatestUserRecord(String username);
 }

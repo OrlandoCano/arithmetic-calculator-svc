@@ -24,7 +24,7 @@ public class Record {
   private Long id;
 
   private UUID operationId;
-  private Long userId;
+  private String userId;
   private Double amount;
   private Double userBalance;
   private String operationResponse;
