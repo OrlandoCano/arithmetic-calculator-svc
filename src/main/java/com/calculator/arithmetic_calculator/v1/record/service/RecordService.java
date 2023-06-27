@@ -1,10 +1,10 @@
 package com.calculator.arithmetic_calculator.v1.record.service;
 
 import com.calculator.arithmetic_calculator.v1.record.model.RecordDto;
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface RecordService {
-  List<RecordDto> loadRecords();
+  Page<RecordDto> loadRecordsPagination(int page, int size);
 
   RecordDto loadLatestUserRecord(String username);
 

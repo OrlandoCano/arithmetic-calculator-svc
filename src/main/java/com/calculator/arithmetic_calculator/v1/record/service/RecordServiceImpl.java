@@ -3,9 +3,9 @@ package com.calculator.arithmetic_calculator.v1.record.service;
 import com.calculator.arithmetic_calculator.v1.record.entity.Record;
 import com.calculator.arithmetic_calculator.v1.record.model.RecordDto;
 import com.calculator.arithmetic_calculator.v1.record.repository.RecordRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,8 +14,11 @@ public class RecordServiceImpl implements RecordService {
   private final RecordRepository repository;
 
   @Override
-  public List<RecordDto> loadRecords() {
-    return repository.findAll().stream()
+  public Page<RecordDto> loadRecordsPagination(int page, int size) {
+    PageRequest pageRequest = PageRequest.of(page, size);
+
+    return repository
+        .findAll(pageRequest)
         .map(
             userRecord ->
                 RecordDto.builder()
@@ -26,8 +29,7 @@ public class RecordServiceImpl implements RecordService {
                     .withUserBalance(userRecord.getUserBalance())
                     .withOperationResponse(userRecord.getOperationResponse())
                     .withCreatedDate(userRecord.getCreatedDate())
-                    .build())
-        .collect(Collectors.toList());
+                    .build());
   }
 
   @Override
