@@ -18,7 +18,7 @@ public class RandomStringStrategy extends OperationStrategy {
   private final String RANDOM_STRING_URL =
       "https://www.random.org/strings/?num=1&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new";
 
-  private RandomStringStrategy(
+  public RandomStringStrategy(
       OperationService operationService, RecordService recordService, UserService userService) {
     super(operationService, recordService, userService);
   }
@@ -39,6 +39,7 @@ public class RandomStringStrategy extends OperationStrategy {
       String errorResponse =
           String.format(INSUFFICIENT_CREDITS_ERROR, request.getOperationType().name());
       newRecord.withOperationResponse(errorResponse);
+      recordService.saveRecord(newRecord.build());
       throw new InsufficientCreditsException(errorResponse);
     }
 

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SubtractionStrategy extends OperationStrategy {
 
-  private SubtractionStrategy(
+  public SubtractionStrategy(
       OperationService operationService, RecordService recordService, UserService userService) {
     super(operationService, recordService, userService);
   }
@@ -36,6 +36,7 @@ public class SubtractionStrategy extends OperationStrategy {
       String errorResponse =
           String.format(INSUFFICIENT_CREDITS_ERROR, request.getOperationType().name());
       newRecord.withOperationResponse(errorResponse);
+      recordService.saveRecord(newRecord.build());
       throw new InsufficientCreditsException(errorResponse);
     }
 
