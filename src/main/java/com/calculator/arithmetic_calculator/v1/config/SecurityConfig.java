@@ -1,10 +1,12 @@
 package com.calculator.arithmetic_calculator.v1.config;
 
+import com.calculator.arithmetic_calculator.v1.login.util.JwtAuthenticationFilter;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -13,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -20,10 +23,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain filterChain(
+      HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable);
-    http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
-        .httpBasic(Customizer.withDefaults());
+    //    http.authorizeHttpRequests((auth) -> auth.anyRequest().permitAll());
+    http.authorizeHttpRequests(
+        (auth) -> {
+          auth.requestMatchers("/", "/login")
+              .permitAll()
+              .anyRequest()
+              .authenticated()
+              .and()
+              .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        });
+    //        .formLogin(form -> form.loginPage("/login").permitAll())
+    //        .logout(LogoutConfigurer::permitAll);
+    //    http.cors(AbstractHttpConfigurer::disable);
 
     return http.build();
   }
@@ -45,5 +60,10 @@ public class SecurityConfig {
   @Bean
   PasswordEncoder getPasswordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+    return http.getSharedObject(AuthenticationManagerBuilder.class).build();
   }
 }
