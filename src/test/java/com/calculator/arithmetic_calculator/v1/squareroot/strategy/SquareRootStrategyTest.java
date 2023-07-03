@@ -9,7 +9,7 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 import com.calculator.arithmetic_calculator.v1.addition.model.request.AdditionRequest;
 import com.calculator.arithmetic_calculator.v1.exception.InsufficientCreditsException;
-import com.calculator.arithmetic_calculator.v1.multiplication.model.request.MultiplicationRequest;
+import com.calculator.arithmetic_calculator.v1.logout.multiplication.model.request.MultiplicationRequest;
 import com.calculator.arithmetic_calculator.v1.operation.model.OperationDto;
 import com.calculator.arithmetic_calculator.v1.operation.service.OperationService;
 import com.calculator.arithmetic_calculator.v1.randomstring.model.request.RandomStringRequest;

@@ -1,4 +1,4 @@
-package com.calculator.arithmetic_calculator.v1.multiplication.model.request;
+package com.calculator.arithmetic_calculator.v1.logout.multiplication.model.request;
 
 import static com.calculator.arithmetic_calculator.v1.constants.OperationType.MULTIPLICATION;
 

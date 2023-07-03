@@ -1,4 +1,4 @@
-package com.calculator.arithmetic_calculator.v1.multiplication.strategy;
+package com.calculator.arithmetic_calculator.v1.logout.multiplication.strategy;
 
 import static com.calculator.arithmetic_calculator.v1.constants.ArithmeticCalculatorConstants.INSUFFICIENT_CREDITS_ERROR;
 import static com.calculator.arithmetic_calculator.v1.constants.OperationType.MULTIPLICATION;

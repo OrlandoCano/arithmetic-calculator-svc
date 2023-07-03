@@ -1,9 +1,9 @@
-package com.calculator.arithmetic_calculator.v1.multiplication.controller;
+package com.calculator.arithmetic_calculator.v1.logout.multiplication.controller;
 
 import static com.calculator.arithmetic_calculator.v1.constants.ArithmeticCalculatorConstants.ARITHMETIC_CALCULATOR_PATH;
 
 import com.calculator.arithmetic_calculator.v1.facade.RequestFacade;
-import com.calculator.arithmetic_calculator.v1.multiplication.model.request.MultiplicationRequest;
+import com.calculator.arithmetic_calculator.v1.logout.multiplication.model.request.MultiplicationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
