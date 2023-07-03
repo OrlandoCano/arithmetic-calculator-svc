@@ -12,4 +12,9 @@ public class ArithmeticCalculatorExceptionHandler extends ResponseEntityExceptio
   public ResponseEntity<String> handleInsufficientCredits(RuntimeException exception) {
     return ResponseEntity.badRequest().body(exception.getMessage());
   }
+
+  @ExceptionHandler(value = SessionExpiredException.class)
+  public ResponseEntity<String> handleSessionExpired(RuntimeException exception) {
+    return ResponseEntity.status(401).body(exception.getMessage());
+  }
 }

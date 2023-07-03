@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RequestMapping(ARITHMETIC_CALCULATOR_PATH)
 @Log
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(
+    origins = {"http://localhost:3000", "http://localhost:8080"},
+    allowCredentials = "true")
 public class UserRecordController {
   private final RecordService recordService;
 

@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,20 +27,17 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(
       HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable);
-    //    http.authorizeHttpRequests((auth) -> auth.anyRequest().permitAll());
     http.authorizeHttpRequests(
         (auth) -> {
           auth.requestMatchers("/", "/login")
               .permitAll()
+              .requestMatchers(HttpMethod.OPTIONS, "/**")
+              .permitAll()
               .anyRequest()
-              .authenticated()
-              .and()
-              .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+              .authenticated();
         });
-    //        .formLogin(form -> form.loginPage("/login").permitAll())
-    //        .logout(LogoutConfigurer::permitAll);
-    //    http.cors(AbstractHttpConfigurer::disable);
 
+    http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     return http.build();
   }
 

@@ -14,15 +14,18 @@ import java.io.IOException;
 import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(RandomStringController.class)
+@SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
+@ExtendWith(SpringExtension.class)
 class RandomStringControllerTest {
   @MockBean private RequestFacade requestFacade;
   @Autowired private MockMvc mockMvc;
@@ -36,7 +39,7 @@ class RandomStringControllerTest {
 
   @Test
   void shouldReturnValidOperationResponse() throws Exception {
-    when(requestFacade.processRequest(any(), any())).thenReturn("rbhjfbrbhfgwhebf");
+    when(requestFacade.processRequest(any())).thenReturn("rbhjfbrbhfgwhebf");
     mockMvc
         .perform(
             post(ARITHMETIC_CALCULATOR_PATH + "random-string")
@@ -47,7 +50,7 @@ class RandomStringControllerTest {
 
   @Test
   void shouldFailDueInsufficientCredits() throws Exception {
-    when(requestFacade.processRequest(any(), any())).thenThrow(InsufficientCreditsException.class);
+    when(requestFacade.processRequest(any())).thenThrow(InsufficientCreditsException.class);
     mockMvc
         .perform(
             post(ARITHMETIC_CALCULATOR_PATH + "random-string")

@@ -15,10 +15,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUtil {
   private final Key jwtSecretKey;
-  private static final long JWT_TOKEN_VALIDITY = 3600; // 1 hour
+  private static final long JWT_TOKEN_VALIDITY = 3600;
 
   public JwtUtil() {
-    // Generate a secret key for signing the JWT token
     this.jwtSecretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
   }
 

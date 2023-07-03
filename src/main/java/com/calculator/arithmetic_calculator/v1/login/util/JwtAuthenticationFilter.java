@@ -1,5 +1,6 @@
 package com.calculator.arithmetic_calculator.v1.login.util;
 
+import com.calculator.arithmetic_calculator.v1.exception.SessionExpiredException;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -39,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
           SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
       } catch (ExpiredJwtException e) {
-        // Handle token expiration
+        throw new SessionExpiredException("Your session is expired login again");
       }
     }
 
