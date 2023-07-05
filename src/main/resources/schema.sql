@@ -33,6 +33,7 @@ create table RECORDS(
     USER_BALANCE float not null,
     OPERATION_RESPONSE varchar(150) not null,
     CREATED_DATE TIMESTAMP not null,
+    ENABLED TINYINT NOT NULL DEFAULT 1 ,
     PRIMARY KEY (ID)
 );
 

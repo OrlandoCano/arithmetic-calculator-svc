@@ -9,4 +9,6 @@ public interface RecordService {
   RecordDto loadLatestUserRecord(String username);
 
   void saveRecord(RecordDto newRecord);
+
+  void softDeleteRecord(Long id);
 }

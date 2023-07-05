@@ -29,4 +29,5 @@ public class Record {
   private Double userBalance;
   private String operationResponse;
   private LocalDateTime createdDate;
+  private boolean enabled;
 }

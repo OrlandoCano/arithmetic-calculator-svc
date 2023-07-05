@@ -20,4 +20,5 @@ public class RecordDto {
   Double userBalance;
   String operationResponse;
   LocalDateTime createdDate;
+  Boolean enabled;
 }

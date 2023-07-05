@@ -18,7 +18,7 @@ public class RecordServiceImpl implements RecordService {
     PageRequest pageRequest = PageRequest.of(page, size);
 
     return repository
-        .findAll(pageRequest)
+        .findAllByEnabledIsTrue(pageRequest)
         .map(
             userRecord ->
                 RecordDto.builder()
@@ -29,6 +29,7 @@ public class RecordServiceImpl implements RecordService {
                     .withUserBalance(userRecord.getUserBalance())
                     .withOperationResponse(userRecord.getOperationResponse())
                     .withCreatedDate(userRecord.getCreatedDate())
+                    .withEnabled(userRecord.isEnabled())
                     .build());
   }
 
@@ -46,6 +47,7 @@ public class RecordServiceImpl implements RecordService {
         .withUserBalance(latestRecord.getUserBalance())
         .withOperationResponse(latestRecord.getOperationResponse())
         .withCreatedDate(latestRecord.getCreatedDate())
+        .withEnabled(latestRecord.isEnabled())
         .build();
   }
 
@@ -59,6 +61,14 @@ public class RecordServiceImpl implements RecordService {
             newRecord.getAmount(),
             newRecord.getUserBalance(),
             newRecord.getOperationResponse(),
-            newRecord.getCreatedDate()));
+            newRecord.getCreatedDate(),
+            true));
+  }
+
+  @Override
+  public void softDeleteRecord(Long id) {
+    Record record = repository.findById(id).orElseThrow();
+    record.setEnabled(false);
+    repository.save(record);
   }
 }
