@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(builder = SubtractionRequest.Builder.class)
+//@JsonDeserialize(builder = SubtractionRequest.Builder.class)
 public class SubtractionRequest extends BaseOperationRequest {
-  @lombok.Builder(setterPrefix = "with", builderMethodName = "subtractionRequestBuilder")
+//  @lombok.Builder(setterPrefix = "with", builderMethodName = "subtractionRequestBuilder")
   public SubtractionRequest(double firstOperand, double secondOperand) {
     super(firstOperand, secondOperand, SUBTRACTION);
   }

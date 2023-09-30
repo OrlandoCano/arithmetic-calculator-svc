@@ -7,12 +7,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(
-    builder =
-        com.calculator.arithmetic_calculator.v1.squareroot.model.request.SquareRootRequest.Builder
-            .class)
+//@JsonDeserialize(
+//    builder =
+//        com.calculator.arithmetic_calculator.v1.squareroot.model.request.SquareRootRequest.Builder
+//            .class)
 public class SquareRootRequest extends BaseOperationRequest {
-  @lombok.Builder(setterPrefix = "with", builderMethodName = "squareRootRequestBuilder")
+//  @lombok.Builder(setterPrefix = "with", builderMethodName = "squareRootRequestBuilder")
   public SquareRootRequest(double firstOperand) {
     super(firstOperand, 0, SQUARE_ROOT);
   }

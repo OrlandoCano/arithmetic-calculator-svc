@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(
-    builder =
-        com.calculator.arithmetic_calculator.v1.division.model.request.DivisionRequest.Builder
-            .class)
+//@JsonDeserialize(
+//    builder =
+//        com.calculator.arithmetic_calculator.v1.division.model.request.DivisionRequest.Builder
+//            .class)
 public class DivisionRequest extends BaseOperationRequest {
 
-  @lombok.Builder(setterPrefix = "with", builderMethodName = "divisionRequestBuilder")
+//  @lombok.Builder(setterPrefix = "with", builderMethodName = "divisionRequestBuilder")
   public DivisionRequest(double firstOperand, double secondOperand) {
     super(firstOperand, secondOperand, DIVISION);
   }
