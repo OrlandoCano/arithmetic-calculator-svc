@@ -31,7 +31,7 @@ dependencies {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()a
+	useJUnitPlatform()
 }
 
 bootBuildImage {
